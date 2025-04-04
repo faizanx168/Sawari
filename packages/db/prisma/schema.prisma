@@ -1,0 +1,265 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String? // Made optional for NextAuth.js
+  phoneNumber   String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // User's preferred locations
+  homeLocationId        String?
+  homeLocation          Location? @relation("UserHomeLocation", fields: [homeLocationId], references: [id])
+  destinationLocationId String?
+  destinationLocation   Location? @relation("UserDestinationLocation", fields: [destinationLocationId], references: [id])
+
+  // Relations
+  accounts         Account[]
+  sessions         Session[]
+  cars             Car[]
+  rides            Ride[]
+  bookings         Booking[]
+  sentRequests     Request[]       @relation("SentRequests")
+  receivedRequests Request[]       @relation("ReceivedRequests")
+  reviewsGiven     Review[]        @relation("Reviewer")
+  reviewsReceived  Review[]        @relation("Reviewed")
+  notifications    Notification[]
+  passengerRides   PassengerRide[]
+}
+
+model Car {
+  id           String     @id @default(cuid())
+  make         String
+  model        String
+  year         Int
+  color        String
+  licensePlate String     @unique
+  seats        Int
+  images       CarImage[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  rides  Ride[]
+}
+
+model CarImage {
+  id        String   @id @default(cuid())
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  carId String
+  car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model Location {
+  id              String   @id @default(cuid())
+  address         String
+  latitude        Float
+  longitude       Float
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  userHome        User[]   @relation("UserHomeLocation")
+  userDestination User[]   @relation("UserDestinationLocation")
+  pickupRides     Ride[]   @relation("PickupLocation")
+  dropoffRides    Ride[]   @relation("DropoffLocation")
+}
+
+model Ride {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Ride details
+  date           String
+  departureTime  String
+  returnTime     String?
+  pricePerSeat   Float
+  seatsAvailable Int
+  status         RideStatus @default(PENDING)
+  isRecurring    Boolean    @default(false)
+  recurringDays  String[]   @default([])
+  pickupRadius   Float?
+  dropoffRadius  Float?
+
+  // Relations
+  driverId          String
+  driver            User            @relation(fields: [driverId], references: [id])
+  carId             String
+  car               Car             @relation(fields: [carId], references: [id])
+  pickupLocationId  String
+  pickupLocation    Location        @relation("PickupLocation", fields: [pickupLocationId], references: [id])
+  dropoffLocationId String
+  dropoffLocation   Location        @relation("DropoffLocation", fields: [dropoffLocationId], references: [id])
+  bookings          Booking[]
+  requests          Request[]
+  reviews           Review[]
+  passengerRides    PassengerRide[]
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Booking details
+  status        BookingStatus @default(PENDING)
+  seats         Int
+  totalPrice    Float
+  isRecurring   Boolean       @default(false)
+  recurringDays String[]      @default([])
+  isConfirmed   Boolean       @default(false)
+  confirmedAt   DateTime?
+
+  // Relations
+  rideId          String
+  ride            Ride           @relation(fields: [rideId], references: [id])
+  userId          String
+  user            User           @relation(fields: [userId], references: [id])
+  passengerRideId String?        @unique
+  passengerRide   PassengerRide? @relation(fields: [passengerRideId], references: [id])
+}
+
+model PassengerRide {
+  id         String    @id @default(cuid())
+  rideId     String
+  ride       Ride      @relation(fields: [rideId], references: [id])
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
+  seatsTaken Int
+  pricePaid  Float
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  booking    Booking?
+  payments   Payment[]
+}
+
+model Request {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Request details
+  status        RequestStatus @default(PENDING)
+  message       String?
+  numberOfSeats Int
+
+  // Relations
+  rideId     String
+  ride       Ride   @relation(fields: [rideId], references: [id])
+  senderId   String
+  sender     User   @relation("SentRequests", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User   @relation("ReceivedRequests", fields: [receiverId], references: [id])
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  amount    Float
+  status    PaymentStatus @default(PENDING)
+
+  // Relations
+  passengerRideId String
+  passengerRide   PassengerRide @relation(fields: [passengerRideId], references: [id])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int // 1-5 stars
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  rideId     String
+  ride       Ride   @relation(fields: [rideId], references: [id])
+  reviewerId String
+  reviewer   User   @relation("Reviewer", fields: [reviewerId], references: [id])
+  reviewedId String
+  reviewed   User   @relation("Reviewed", fields: [reviewedId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type      String // 'booking' | 'system'
+  message   String
+  read      Boolean  @default(false)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum RideStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  REJECTED
+}

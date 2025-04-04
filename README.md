@@ -1,84 +1,126 @@
-# Turborepo starter
+# Sawari - Smart Carpooling Platform
 
-This Turborepo starter is maintained by the Turborepo core team.
 
-## Using this example
+## Overview
 
-Run the following command:
+Sawari is a modern carpooling platform that connects commuters for efficient and sustainable ride-sharing. The platform aims to reduce traffic congestion, lower commuting costs, and create a more sustainable transportation ecosystem.
 
-```sh
-npx create-turbo@latest
-```
+## 🚀 Features
 
-## What's inside?
+### Core Features
+- **Smart Ride Matching**
+  - Advanced search with distance radius, seat availability, and time filters
+  - Real-time distance and duration calculations
+  - Flexible scheduling (one-time, daily, weekly, monthly rides)
+  - Price and distance-based sorting
 
-This Turborepo includes the following packages/apps:
+- **Interactive Map Interface**
+  - Real-time ride visualization on Google Maps
+  - Dynamic route preview with pickup/dropoff locations
+  - Adjustable search radius
+  - Interactive ride markers with instant information
+  - Smooth animations and transitions
 
-### Apps and Packages
+- **Location Intelligence**
+  - Current location detection
+  - Google Places address autocomplete
+  - Distance-based filtering
+  - Real-time route visualization
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **User Management**
+  - Secure authentication
+  - Profile management
+  - Ride history tracking
+  - Booking management
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Coming Soon
+- Real-time ride tracking
+- In-app messaging
+- Rating and review system
+- In-app payments
+- Enhanced safety features
 
-### Utilities
+## 🛠️ Tech Stack
 
-This Turborepo has some additional tools already setup for you:
+- **Frontend**
+  - Next.js 13 (App Router)
+  - TypeScript
+  - Tailwind CSS
+  - React Hooks
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- **APIs & Services**
+  - Google Maps JavaScript API
+  - Google Places API
+  - Google Distance Matrix API
+  - Google Geocoding API
 
-### Build
+- **Authentication**
+  - NextAuth.js
+  - JWT tokens
 
-To build all apps and packages, run the following command:
+- **Development Tools**
+  - ESLint
+  - Prettier
+  - Husky (Git hooks)
+  - TypeScript compiler
 
-```
-cd my-turborepo
-pnpm build
-```
 
-### Develop
 
-To develop all apps and packages, run the following command:
+### Google Maps API
+1. Visit [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project or select an existing one
+3. Enable the following APIs:
+   - Maps JavaScript API
+   - Places API
+   - Distance Matrix API
+   - Geocoding API
+4. Create credentials (API key)
+5. Add the API key to your `.env.local` file
 
-```
-cd my-turborepo
-pnpm dev
-```
+## 📱 Usage
 
-### Remote Caching
+### Finding a Ride
+1. Enter your pickup and dropoff locations
+2. Select your preferred date and time
+3. Adjust the search radius if needed
+4. Click "Find Available Rides"
+5. View available rides on the map and in the list
+6. Click "View Route" to see the journey preview
+7. Click "Book Now" to reserve your seat
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Offering a Ride
+1. Click "Offer Ride" in the navigation
+2. Enter ride details (route, date, time, seats, price)
+3. Set recurring schedule if applicable
+4. Review and publish your ride
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## 🤝 Contributing
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+1. Fork the repository
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
 
-```
-cd my-turborepo
-npx turbo login
-```
+## 📝 Code Style
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+- Use TypeScript for all new code
+- Follow the existing code structure
+- Add appropriate comments and documentation
+- Ensure all tests pass before submitting PR
+- Follow the ESLint and Prettier configurations
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-```
-npx turbo link
-```
 
-## Useful Links
+## 📄 License
 
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

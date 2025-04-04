@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="400" cy="300" r="250" fill="#EFF6FF" />
+  
+  <!-- Car Body -->
+  <path d="M300 400 L500 400 L480 350 L320 350 Z" fill="#3B82F6" />
+  <path d="M320 350 L480 350 L460 300 L340 300 Z" fill="#2563EB" />
+  
+  <!-- Windows -->
+  <path d="M340 310 L380 310 L380 340 L340 340 Z" fill="#93C5FD" />
+  <path d="M420 310 L460 310 L460 340 L420 340 Z" fill="#93C5FD" />
+  
+  <!-- Wheels -->
+  <circle cx="340" cy="400" r="20" fill="#1E3A8A" />
+  <circle cx="460" cy="400" r="20" fill="#1E3A8A" />
+  
+  <!-- People -->
+  <circle cx="360" cy="330" r="15" fill="#F3F4F6" />
+  <circle cx="440" cy="330" r="15" fill="#F3F4F6" />
+  
+  <!-- Smiles -->
+  <path d="M350 335 Q360 340 370 335" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  <path d="M430 335 Q440 340 450 335" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  
+  <!-- Road -->
+  <path d="M200 450 L600 450" stroke="#6B7280" stroke-width="4" stroke-dasharray="10 10" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="200" cy="200" r="30" fill="#BFDBFE" opacity="0.5" />
+  <circle cx="600" cy="200" r="40" fill="#BFDBFE" opacity="0.5" />
+  <circle cx="400" cy="100" r="25" fill="#BFDBFE" opacity="0.5" />
+</svg> 

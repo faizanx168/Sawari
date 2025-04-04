@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="400" cy="300" r="250" fill="#EFF6FF" />
+  
+  <!-- Central Circle -->
+  <circle cx="400" cy="300" r="100" fill="#3B82F6" />
+  
+  <!-- Connecting Lines -->
+  <line x1="400" y1="200" x2="400" y2="400" stroke="#93C5FD" stroke-width="4" />
+  <line x1="300" y1="300" x2="500" y2="300" stroke="#93C5FD" stroke-width="4" />
+  <line x1="350" y1="250" x2="450" y2="350" stroke="#93C5FD" stroke-width="4" />
+  <line x1="350" y1="350" x2="450" y2="250" stroke="#93C5FD" stroke-width="4" />
+  
+  <!-- People Icons -->
+  <g transform="translate(300, 200)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(500, 200)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(300, 400)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(500, 400)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(350, 250)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(450, 250)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(350, 350)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <g transform="translate(450, 350)">
+    <circle cx="0" cy="0" r="20" fill="#F3F4F6" />
+    <path d="M-10 5 Q0 15 10 5" stroke="#1E3A8A" stroke-width="2" fill="none" />
+  </g>
+  
+  <!-- Decorative Elements -->
+  <circle cx="200" cy="200" r="30" fill="#BFDBFE" opacity="0.5" />
+  <circle cx="600" cy="200" r="40" fill="#BFDBFE" opacity="0.5" />
+  <circle cx="400" cy="100" r="25" fill="#BFDBFE" opacity="0.5" />
+</svg> 
